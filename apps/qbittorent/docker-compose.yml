@@ -5,15 +5,15 @@ services:
     container_name: qbittorrent
     environment:
       - TZ=Asia/Calcutta
-      - WEBUI_PORT=8080
-      - TORRENTING_PORT=6881
+      - WEBUI_PORT=${QBITTORENT_PORT}
+      - TORRENTING_PORT=${TORRENTING_PORT}
     volumes:
       - ${CONFIG_PATH}:/config
       - ${DOWNLOADS_PATH}:/downloads #optional
     ports:
-      - ${QBITTORENT_PORT}:8080
-      - ${TORRENTING_PORT}:6881
-      - ${TORRENTING_PORT}:6881/udp
+      - ${QBITTORENT_PORT}:${QBITTORENT_PORT}
+      - ${TORRENTING_PORT}:${TORRENTING_PORT}
+      - ${TORRENTING_PORT}:${TORRENTING_PORT}/udp
     env_file:
       - .env
     restart: unless-stopped
