@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  navidrome:
+    image: deluan/navidrome:latest
+    user: "${USER_ID}:${GROUP_ID}" # Referencing values from .env
+    ports:
+      - "${NAVIDROME_PORT}:4533"
+    restart: unless-stopped
+    environment:
+      # Environment variables loaded from .env file
+      ND_SCANSCHEDULE: "${ND_SCANSCHEDULE}"
+      ND_LOGLEVEL: "${ND_LOGLEVEL}"
+      ND_SESSIONTIMEOUT: "${ND_SESSIONTIMEOUT}"
+      ND_BASEURL: "${ND_BASEURL}"
+    volumes:
+      - "${DATA_VOLUME}:/data"
+      - "${MUSIC_VOLUME}:/music:ro"
+    env_file:
+      - .env
